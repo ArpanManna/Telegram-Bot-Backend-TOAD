@@ -20,6 +20,9 @@ const userSchema = new mongoose.Schema({
     },
     walletAddress: {
         type: String
+    },
+    referredBy: {
+        type: String
     }
 })
 
