@@ -45,7 +45,7 @@ bot.onText(/\/start/, async (msg, match) => {
         if (res.length) {
             const referral_url=`https://t.me/pikapi_community_bot?start=${msg.chat.id}`
             bot.sendMessage(msg.chat.id,
-                `Your balance: ${res[0].balance} $TOAD\nReferral count : ${res[0].referralCount}\nYour referral link : ${referral_url}`,
+                `💰 Earnings: ${res[0].balance} $TOAD\n👬 Referral count : ${res[0].referralCount}\n\nRefer friends to receive additional $TOAD tokens!\n\nFor every seuucessful referral to the Toad Community chat, you will receive ${config.referralBonus} tokens, that will be applicable to any future $TOAD token distribution.\n\n👉 Share this referral link : ${referral_url} or click below 👇`,
                 {
                     reply_markup: {
                         inline_keyboard: [
@@ -61,15 +61,16 @@ bot.onText(/\/start/, async (msg, match) => {
             )
         }
         else {
-            const welcome_msg = `Hi, ${msg.chat.first_name}! This is $${config.symbol}, the official memecoin of Toad community 👋
-        $${config.symbol} is a of friend of $BRETT on Base and $PEPE on EThereum. That's all you ever wanted.
-        Join ${config.groupId} to kick-start your journey with us!`
+            const image_link = "/Users/arpan/Documents/telegram-bot-backend/public/img.png"
+
+            const welcome_msg = `👋 Hi, ${msg.chat.first_name}!\n\n💡 Join **${config.groupName}** chat to receive ${config.joiningBonus} $TOAD tokens and shape the future of Toad!\n\n❓ Why should you join the Toad Community?\n✨ Receive ${config.joiningBonus} TOAD tokens as welcome bonus\n✨ Access to exclusive updates and announcements\n✨ Improve Toad by sharing feedback and voting on proposals\n✨ Be an integral part of any future NFT distribution\n\n⬇️ Click the button below to join Toad Community!`
+            await bot.sendPhoto(msg.chat.id, "/Users/arpan/Documents/telegram-bot-backend/public/img.png")
             bot.sendMessage(msg.chat.id, welcome_msg, {
                 reply_markup: {
                     inline_keyboard: [
                         [
                             {
-                                text: "Join Telegram",
+                                text: "Join Now",
                                 url: config.telegramJoiningLink,
                             },
                         ],
@@ -85,6 +86,21 @@ bot.onText(/\/start/, async (msg, match) => {
             referredBy: referredById
         })
         await user.save()
+        const welcome_msg = `👋 Hi, ${msg.chat.first_name}!\n\n💡 Join **${config.groupName}** chat to receive ${config.joiningBonus} $TOAD tokens and shape the future of Toad!\n\n❓ Why should you join the Toad Community?\n✨ Receive ${config.joiningBonus} TOAD tokens as welcome bonus\n✨ Access to exclusive updates and announcements\n✨ Improve Toad by sharing feedback and voting on proposals\n✨ Be an integral part of any future NFT distribution\n\n⬇️ Click the button below to join Toad Community!`
+            
+            await bot.sendPhoto(msg.chat.id, "/Users/arpan/Documents/telegram-bot-backend/public/img.png")
+            bot.sendMessage(msg.chat.id, welcome_msg, {
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            {
+                                text: "Join Telegram",
+                                url: config.telegramJoiningLink,
+                            },
+                        ],
+                    ],
+                }
+            })
     }
 })
 
