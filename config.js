@@ -1,5 +1,5 @@
 export const config = {
-    "botId": "",
+    "botUserName": "pikapi_community_bot",
     "groupName": "Toad Community",
     "groupId": "@toad_test",
     "symbol": "TOAD",
