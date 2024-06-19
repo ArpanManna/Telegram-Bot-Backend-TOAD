@@ -45,7 +45,7 @@ bot.onText(/\/start/, async (msg, match) => {
         if (res.length) {
             const referral_url = `https://t.me/${config.botUserName}?start=${msg.chat.id}`
             bot.sendMessage(msg.chat.id,
-                `💰 Earnings: ${res[0].balance} $TOAD\n👬 Referral count : ${res[0].referralCount}\n\nRefer friends to receive additional $TOAD tokens!\n\nFor every seuucessful referral to the Toad Community chat, you will receive ${config.referralBonus} tokens, that will be applicable to any future $TOAD token distribution.\n\n👉 Share this referral link : ${referral_url} or click below 👇`,
+                `💰 Earnings: ${res[0].balance} $TOAD\n👬 Referral count : ${res[0].referralCount}\n\nRefer friends to receive additional $TOAD tokens!\n\nFor every seuucessful referral to the Toad Community chat, you will receive ${config.referralBonus} tokens, that will be applicable to any future $TOAD token distribution.\n\n👉 Share this referral link : ${referral_url} or click below ⬇️`,
                 {
                     reply_markup: {
                         inline_keyboard: [
@@ -63,7 +63,7 @@ bot.onText(/\/start/, async (msg, match) => {
         else {
             const image_link = "/Users/arpan/Documents/telegram-bot-backend/public/img.png"
 
-            const welcome_msg = `👋 Hi, ${msg.chat.first_name}!\n\n🔗 Join *${config.groupName}* chat to receive ${config.joiningBonus} $TOAD tokens and shape the future of Toad!\n\n❓ *Why should you join the Toad Community?*\n\n🎉 Receive ${config.joiningBonus} $TOAD tokens as welcome bonus\n💡 Engage in insightful discussions\n📢 Access to exclusive updates and announcements\n🤝 Improve Toad by sharing feedback and voting on proposals\n✨ Be an integral part of $TOAD token launch\n\n⬇️ Click the button below to join Toad Community!`
+            const welcome_msg = `👋 Hi, ${msg.chat.first_name}!\n\n🔗 Join *${config.groupName}* chat to receive ${config.joiningBonus} $TOAD tokens and shape the future of Toad  🐸!\n\n❓ *Why should you join the Toad Community?*\n\n🎉 Receive ${config.joiningBonus} $TOAD tokens as welcome bonus\n💡 Engage in insightful discussions\n📢 Access to exclusive updates and announcements\n🤝 Improve Toad by sharing feedback and voting on proposals\n✨ Be an integral part of $TOAD token launch\n\n⬇️ Click the button below to join Toad Community!`
             // await bot.sendPhoto(msg.chat.id, "/Users/arpan/Documents/telegram-bot-backend/public/img.png")
             bot.sendMessage(msg.chat.id, welcome_msg, {
                 reply_markup: {
@@ -87,7 +87,7 @@ bot.onText(/\/start/, async (msg, match) => {
             referredBy: referredById
         })
         await user.save()
-        const welcome_msg = `👋 Hi, ${msg.chat.first_name}!\n\n🔗 Join *${config.groupName}* chat to receive ${config.joiningBonus} $TOAD tokens and shape the future of Toad!\n\n❓ *Why should you join the Toad Community?*\n\n🎉 Receive ${config.joiningBonus} $TOAD tokens as welcome bonus\n💡 Engage in insightful discussions\n📢 Access to exclusive updates and announcements\n🤝 Improve Toad by sharing feedback and voting on proposals\n✨ Be an integral part of $TOAD token launch\n\n⬇️ Click the button below to join Toad Community!`
+        const welcome_msg = `👋 Hi, ${msg.chat.first_name}!\n\n🔗 Join *${config.groupName}* chat to receive ${config.joiningBonus} $TOAD tokens and shape the future of Toad  🐸!\n\n❓ *Why should you join the Toad Community?*\n\n🎉 Receive ${config.joiningBonus} $TOAD tokens as welcome bonus\n💡 Engage in insightful discussions\n📢 Access to exclusive updates and announcements\n🤝 Improve Toad by sharing feedback and voting on proposals\n✨ Be an integral part of $TOAD token launch\n\n⬇️ Click the button below to join Toad Community!`
         bot.sendMessage(msg.chat.id, welcome_msg, {
             reply_markup: {
                 inline_keyboard: [
@@ -151,7 +151,7 @@ bot.on('message', async (msg) => {
         const bal = res[0].balance
         
         // send message to user chat
-        const referral_url = `https://t.me/pikapi_community_bot?start=${msg.new_chat_member.id}`
+        const referral_url = `https://t.me/${config.botUserName}?start=${msg.new_chat_member.id}`
         bot.sendMessage(msg.new_chat_member.id,
             `💵 You have earned ${bal} $TOAD 🎉.\n\nRefer friends to receive additional $TOAD tokens!\nFor every successful referral to the Toad Community chat, you will receive ${config.referralBonus} tokens, that will be applicable to any future $TOAD token distribution.\n\n👉 Share this referral link : ${referral_url} or click below ⬇️`,
             {
