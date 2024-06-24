@@ -6,7 +6,7 @@ import { config } from "../config.js";
 dotenv.config();
 
 const TELEGRAM_API = `https://api.telegram.org/bot${process.env.BOT_TOKEN}`
-const DB_CONNECTION_URL = "mongodb://localhost:27017/"
+const DB_CONNECTION_URL = "mongodb+srv://toadAdmin:Welkom%40012@cluster0.pmx6vmq.mongodb.net/airdrop";
 
 // establish DB connection
 mongoose.connect(DB_CONNECTION_URL)
