@@ -6,10 +6,9 @@ import { config } from "../config.js";
 dotenv.config();
 
 const TELEGRAM_API = `https://api.telegram.org/bot${process.env.BOT_TOKEN}`
-const DB_CONNECTION_URL = "mongodb+srv://toadAdmin:Welkom%40012@cluster0.pmx6vmq.mongodb.net/airdrop";
 
 // establish DB connection
-mongoose.connect(DB_CONNECTION_URL)
+mongoose.connect(process.env.DB_CONNECTION_URL)
     .then(
         () => console.log("Database connected!")
     )
@@ -149,7 +148,7 @@ bot.on('message', async (msg) => {
         // fetch user balance
         const res = await User.find({ chatId: msg.new_chat_member.id })
         const bal = res[0].balance
-        
+
         // send message to user chat
         const referral_url = `https://t.me/${config.botUserName}?start=${msg.new_chat_member.id}`
         bot.sendMessage(msg.new_chat_member.id,
