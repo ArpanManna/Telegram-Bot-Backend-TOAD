@@ -1,6 +1,7 @@
 import http from 'http'
 import express from 'express'
 import {router as routes} from './routes/index.js'
+import cors from 'cors'
 import dotenv from 'dotenv';
 import connectDatabase from './utils/database.js';
 dotenv.config();
@@ -8,6 +9,9 @@ dotenv.config();
 
 const app = express()
 connectDatabase()
+app.use(cors({
+    origin: "*"
+}))
 app.use(express.json())
 app.use('/', routes)
 const httpServer = http.createServer(app)
