@@ -4,8 +4,8 @@ const getQuestion = async (req, res) => {
     const { date, chatId } = req.query
     try {
         const question = await Trivia.find({ date: date })
-        console.log(question)
-        const responseStatus = await Trivia.find({ "responses.userId": chatId }, { "responses.$": 1 })
+        // console.log(question)
+        const responseStatus = await Trivia.find({date: date, "responses.userId": chatId }, { "responses.$": 1 })
         const userDetails = await User.find({ chatId: chatId })
         let balance = 0;
         if (userDetails) {
