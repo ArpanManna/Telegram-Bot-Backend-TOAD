@@ -131,15 +131,15 @@ bot.on('message', async (msg) => {
 
                 // update earnings collection for new user joining bonus
                 const time = new Date().toDateString().split(' ').slice(0, 3)
-                await Earnings.updateOne({ chatId: msg.new_chat_member.id }, {
-                    $push: {
-                        earnings: {
-                            type: 'Joining Bonus',
-                            score: config.joiningBonus,
-                            time: time[2] + ' ' + time[1]
-                        }
+                let userEarnings = new Earnings({
+                    chatId: msg.new_chat_member.id,
+                    earnings: {
+                        type: 'Joining Bonus',
+                        score: config.joiningBonus,
+                        time: time[2] + " " + time[1]
                     }
                 })
+                await userEarnings.save()
                 // update earnings collection for referrer bonus
                 await Earnings.updateOne({ chatId: referredById }, {
                     $push: {
@@ -162,15 +162,15 @@ bot.on('message', async (msg) => {
                 await user.save()
                 // update earnings collection for new user joining bonus
                 const time = new Date().toDateString().split(' ').slice(0, 3)
-                await Earnings.updateOne({ chatId: msg.new_chat_member.id }, {
-                    $push: {
-                        earnings: {
-                            type: 'Joining Bonus',
-                            score: config.joiningBonus,
-                            time: time[2] + ' ' + time[1]
-                        }
+                let userEarnings = new Earnings({
+                    chatId: msg.new_chat_member.id,
+                    earnings: {
+                        type: 'Joining Bonus',
+                        score: config.joiningBonus,
+                        time: time[2] + " " + time[1]
                     }
                 })
+                await userEarnings.save()
             }
         } catch (error) {
             console.log(error)
