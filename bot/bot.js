@@ -65,7 +65,6 @@ bot.onText(/\/start/, async (msg, match) => {
             const image_link = "/Users/arpan/Documents/telegram-bot-backend/public/img.png"
 
             const welcome_msg = `👋 Hi, ${msg.chat.first_name}!\n\n🔗 Join *${config.groupName}* chat to receive ${config.joiningBonus} $TOAD tokens and shape the future of Toad  🐸!\n\n❓ *Why should you join the Toad Community?*\n\n🎉 Receive ${config.joiningBonus} $TOAD tokens as welcome bonus\n💡 Engage in insightful discussions\n📢 Access to exclusive updates and announcements\n🤝 Improve Toad by sharing feedback and voting on proposals\n✨ Be an integral part of $TOAD token launch\n\n⬇️ Click the button below to join Toad Community!`
-            // await bot.sendPhoto(msg.chat.id, "/Users/arpan/Documents/telegram-bot-backend/public/img.png")
             bot.sendMessage(msg.chat.id, welcome_msg, {
                 reply_markup: {
                     inline_keyboard: [
@@ -148,7 +147,7 @@ bot.on('message', async (msg) => {
                 await Earnings.updateOne({ chatId: referredById }, {
                     $push: {
                         earnings: {
-                            type: 'Joining Bonus',
+                            type: 'Referral',
                             score: config.referralBonus,
                             time: time[2] + ' ' + time[1]
                         }
