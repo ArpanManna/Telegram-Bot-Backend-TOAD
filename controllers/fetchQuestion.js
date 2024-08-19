@@ -18,8 +18,8 @@ const getQuestion = async (req, res) => {
             questionId: question[0]? question[0]._id : null,
             question: question[0]? question[0].question : null,
             answerOptions: question[0]? question[0].answers : null,
-            difficulty: question[0]? question[0].difficulty : null,
-            score: question[0]? question[0].score : null,
+            difficulty: question[0]? question[0].difficulty : 'Easy',
+            score: question[0]? question[0].score : 0,
             correctAnswer: question[0]? question[0].correctAnswer : null,
             balance: balance,
             responseStatus: responseStatus? responseStatus : null
