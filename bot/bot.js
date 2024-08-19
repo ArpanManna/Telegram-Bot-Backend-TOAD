@@ -130,7 +130,7 @@ bot.on('message', async (msg) => {
                 })
 
                 // update earnings collection for new user joining bonus
-                const time = new Date().toDateString().split(' ').slice(0,3)
+                const time = new Date().toDateString().split(' ').slice(0, 3)
                 await Earnings.updateOne({ chatId: msg.new_chat_member.id }, {
                     $push: {
                         earnings: {
@@ -160,6 +160,17 @@ bot.on('message', async (msg) => {
                     referralCount: 0
                 })
                 await user.save()
+                // update earnings collection for new user joining bonus
+                const time = new Date().toDateString().split(' ').slice(0, 3)
+                await Earnings.updateOne({ chatId: msg.new_chat_member.id }, {
+                    $push: {
+                        earnings: {
+                            type: 'Joining Bonus',
+                            score: config.joiningBonus,
+                            time: time[2] + ' ' + time[1]
+                        }
+                    }
+                })
             }
         } catch (error) {
             console.log(error)
