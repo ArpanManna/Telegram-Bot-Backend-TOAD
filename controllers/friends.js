@@ -15,7 +15,7 @@ const getFriends = async(req,res) => {
             error: error
         })
     }
-
+    
 }
 
 export default getFriends

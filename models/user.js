@@ -26,6 +26,9 @@ const userSchema = new mongoose.Schema({
     },
     referrals: {
         type: Array
+    },
+    earnings: {
+        type: Array
     }
 })
 
