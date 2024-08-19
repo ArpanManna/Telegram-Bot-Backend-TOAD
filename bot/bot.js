@@ -79,7 +79,7 @@ bot.onText(/\/start/, async (msg, match) => {
         }
     } else {
         const referredById = match.input.split(" ")[1]
-        console.log(match.input.split(" ")[1])
+        // console.log(match.input.split(" ")[1])
         let user = new User({
             chatId: msg.chat.id,
             referredBy: referredById
@@ -104,12 +104,12 @@ bot.onText(/\/start/, async (msg, match) => {
 
 
 bot.on('message', async (msg) => {
-    console.log(msg)
+    // console.log(msg)
     if (msg.new_chat_member) {
         // update db
         try {
             const res = await User.find({ chatId: msg.new_chat_member.id })
-            console.log(res)
+            // console.log(res)
             if (res.length) {
                 // update user joining balance
                 await User.updateOne({ chatId: msg.new_chat_member.id }, {
