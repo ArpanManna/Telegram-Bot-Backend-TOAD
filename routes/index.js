@@ -3,7 +3,7 @@ import getFriends from '../controllers/friends.js';
 import getLeaders from '../controllers/leaders.js';
 import getQuestion from '../controllers/fetchQuestion.js';
 import addQuestion from '../controllers/addQuestion.js';
-import updateResponse from '../controllers/updateresponse.js';
+import updateResponse from '../controllers/updateResponse.js';
 import getEarnings from '../controllers/getEarnings.js';
 const router = express.Router();
 

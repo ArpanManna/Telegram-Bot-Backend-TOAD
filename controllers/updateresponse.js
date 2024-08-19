@@ -6,7 +6,23 @@ import { Earnings } from "../models/earnings.js";
 // 2. If correct response, add score to user balance 
 // 3. If correct response, add score to earnings
 const updateResponse = async (req, res) => {
-    const { questionId, userId, selectedOption, isCorrect } = req.body;
+    const { questionId, userId, userName, selectedOption, isCorrect } = req.body;
+    // check if user doesnot exist create user document in db
+    try {
+        const user = User.find({ chatId: userId })
+        if (!user.length) {
+            let newUser = new User({
+                chatId: userId,
+                userName: userName,
+                active: true,
+                balance: 0,
+                referralCount: 0
+            })
+            await newUser.save()
+        }
+    } catch (error) {
+        console.log(error)
+    }
     try {
         const question = await Trivia.find({ _id: questionId })
         console.log(question)
@@ -28,7 +44,7 @@ const updateResponse = async (req, res) => {
             })
             // update Earnings collection
             const userEarnings = await Earnings.find({ chatId: userId })
-            const time = new Date().toDateString().split(' ').slice(0,3)
+            const time = new Date().toDateString().split(' ').slice(0, 3)
             if (!userEarnings.length) {
                 let user = new Earnings({
                     chatId: userId,
