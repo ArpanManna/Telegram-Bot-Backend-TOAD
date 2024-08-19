@@ -9,7 +9,7 @@ const updateResponse = async (req, res) => {
     const { questionId, userId, selectedOption, isCorrect } = req.body;
     try {
         const question = await Trivia.find({ _id: questionId })
-        // console.log(question)
+        console.log(question)
         await Trivia.updateOne({ _id: questionId }, {
             $push: {
                 responses: {
@@ -28,12 +28,14 @@ const updateResponse = async (req, res) => {
             })
             // update Earnings collection
             const userEarnings = await Earnings.find({ chatId: userId })
+            const time = new Date().toDateString().split(' ').slice(0,3)
             if (!userEarnings.length) {
                 let user = new Earnings({
                     chatId: userId,
                     earnings: {
                         type: 'Trivia',
-                        score: question[0].score
+                        score: question[0].score,
+                        time: time[2] + " " + time[1]
                     }
                 })
                 await user.save()
@@ -42,7 +44,8 @@ const updateResponse = async (req, res) => {
                     $push: {
                         earnings: {
                             type: 'Trivia',
-                            score: question[0].score
+                            score: question[0].score,
+                            time: time[2] + ' ' + time[1]
                         }
                     }
                 })
