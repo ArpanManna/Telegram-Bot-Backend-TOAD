@@ -10,7 +10,8 @@ dotenv.config();
 const app = express()
 connectDatabase()
 app.use(cors({
-    origin: "*"
+    origin: "*",
+    methods: ['GET', 'POST', 'PUT']
 }))
 app.use(express.json())
 app.use('/', routes)
