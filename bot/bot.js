@@ -1,8 +1,10 @@
 import TelegramBot from "node-telegram-bot-api";
 import mongoose from "mongoose";
 import { User } from "../models/user.js";
+import { Earnings } from "../models/earnings.js";
 import dotenv from 'dotenv';
 import { config } from "../config.js";
+
 dotenv.config();
 
 const TELEGRAM_API = `https://api.telegram.org/bot${process.env.BOT_TOKEN}`
@@ -128,6 +130,28 @@ bot.on('message', async (msg) => {
                     $inc: {
                         referralCount: 1,
                         balance: config.referralBonus
+                    }
+                })
+
+                // update earnings collection for new user joining bonus
+                const time = new Date().toDateString().split(' ').slice(0,3)
+                await Earnings.updateOne({ chatId: msg.new_chat_member.id }, {
+                    $push: {
+                        earnings: {
+                            type: 'Joining Bonus',
+                            score: config.joiningBonus,
+                            time: time[2] + ' ' + time[1]
+                        }
+                    }
+                })
+                // update earnings collection for referrer bonus
+                await Earnings.updateOne({ chatId: referredById }, {
+                    $push: {
+                        earnings: {
+                            type: 'Joining Bonus',
+                            score: config.referralBonus,
+                            time: time[2] + ' ' + time[1]
+                        }
                     }
                 })
             }
