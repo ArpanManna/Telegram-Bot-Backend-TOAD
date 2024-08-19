@@ -7,8 +7,6 @@ import { config } from "../config.js";
 
 dotenv.config();
 
-const TELEGRAM_API = `https://api.telegram.org/bot${process.env.BOT_TOKEN}`
-
 // establish DB connection
 mongoose.connect(process.env.DB_CONNECTION_URL)
     .then(
@@ -111,7 +109,6 @@ bot.on('message', async (msg) => {
         // update db
         try {
             const res = await User.find({ chatId: msg.new_chat_member.id })
-            // console.log(referredById)
             console.log(res)
             if (res.length) {
                 // update user joining balance
