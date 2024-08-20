@@ -1,13 +1,27 @@
 import { User } from "../models/user.js"
+import { Earnings } from "../models/earnings.js"
 
 const getFriends = async(req,res) => {
     const { chatId } = req.query
+    const response = []
+    let totalFriends = 0
     try{
-        const friends = await User.find({referredBy: chatId})
+        const friends = await Earnings.find({chatId: chatId})
+        const earnings = friends[0].earnings
+        console.log(earnings)
+        for(let i=0;i<earnings.length; i++){
+            if(earnings[i].type == 'Referral'){
+                totalFriends += 1
+                response.push({
+                    userName: earnings[i].referred ? earnings[i].referred : null,
+                    score: earnings[i].score
+                })
+            }
+        }
         res.status(200).json({
             success: true,
-            friendLists: friends.slice(0,10),
-            totalFriends: friends? friends.length : 0
+            friendLists: response,
+            totalFriends: totalFriends
         })
     }catch(error){
         res.status(400).json({
@@ -15,7 +29,7 @@ const getFriends = async(req,res) => {
             error: error
         })
     }
-    
+
 }
 
 export default getFriends
