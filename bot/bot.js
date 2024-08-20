@@ -146,7 +146,8 @@ bot.on('message', async (msg) => {
                         earnings: {
                             type: 'Referral',
                             score: config.referralBonus,
-                            time: time[2] + ' ' + time[1]
+                            time: time[2] + ' ' + time[1],
+                            referred: msg.new_chat_member.id
                         }
                     }
                 })
