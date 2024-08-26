@@ -8,7 +8,7 @@ const getFriends = async(req,res) => {
     try{
         const friends = await Earnings.find({chatId: chatId})
         const earnings = friends[0].earnings
-        console.log(earnings)
+        
         for(let i=0;i<earnings.length; i++){
             if(earnings[i].type == 'Referral'){
                 totalFriends += 1
@@ -20,7 +20,7 @@ const getFriends = async(req,res) => {
         }
         res.status(200).json({
             success: true,
-            friendLists: response,
+            friendLists: response.length >=3 ? response.slice(0,3): response,
             totalFriends: totalFriends
         })
     }catch(error){

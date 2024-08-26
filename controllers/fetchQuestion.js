@@ -5,8 +5,21 @@ const getQuestion = async (req, res) => {
     try {
         const question = await Trivia.find({ date: date })
         // console.log(question)
-        const responseStatus = await Trivia.find({date: date, "responses.userId": chatId }, { "responses.$": 1 })
+        let responseStatus
+        
+        // check if user exists in our database
         const userDetails = await User.find({ chatId: chatId })
+        if(userDetails){
+            // if exists fetch response status
+            responseStatus = await Trivia.find({date: date, "responses.userId": chatId }, { "responses.$": 1 })
+        }
+        else{
+            // register userDetails in Db
+            let user = new User({
+                chatId: msg.chat.id
+            })
+            await user.save()
+        }
         let balance = 0;
         if (userDetails) {
             balance = userDetails[0].balance ? userDetails[0].balance : 0
