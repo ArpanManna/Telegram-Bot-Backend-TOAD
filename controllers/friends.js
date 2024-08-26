@@ -20,7 +20,7 @@ const getFriends = async(req,res) => {
         }
         res.status(200).json({
             success: true,
-            friendLists: response.length >=3 ? response.slice(0,3): response,
+            friendLists: response.length >=20 ? response.slice(0,20): response,
             totalFriends: totalFriends
         })
     }catch(error){
