@@ -22,7 +22,7 @@ const updateResponse = async (req, res) => {
             await newUser.save()
         }
     } catch (error) {
-        res.status(400).json({
+        return res.status(400).json({
             success: false,
             error: error
         })
@@ -31,7 +31,7 @@ const updateResponse = async (req, res) => {
         const question = await Trivia.find({ _id: questionId })
         console.log(question)
         if(!question){
-            res.status(400).json({
+            return res.status(400).json({
                 success: false,
                 error: 'Updation failed.Question not found.'
             })
@@ -39,7 +39,7 @@ const updateResponse = async (req, res) => {
         // check if user response is already added once
         const responseStatus = await Trivia.find({_id: question[0]._id}, {responses: { $elemMatch: {userId: userId }}})
         if(responseStatus && responseStatus[0].responses.length){
-            res.status(400).json({
+            return res.status(400).json({
                 success: false,
                 error: 'Already responded.'
             })

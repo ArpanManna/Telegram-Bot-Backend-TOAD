@@ -14,7 +14,7 @@ const getEarnings = async (req, res) => {
             })
         }
         else {
-            res.status(200).json({
+            return res.status(200).json({
                 success: false,
                 earnings: null
             })

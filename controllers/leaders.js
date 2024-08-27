@@ -35,7 +35,7 @@ const getLeaders = async (req, res) => {
                 leaderboard: leaders
             })
         } else {
-            res.status(400).json({
+            return res.status(400).json({
                 success: true,
                 userBalance: curUser?curUser.balance:0,
                 holders: totalHolders,
