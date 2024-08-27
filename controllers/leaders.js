@@ -17,7 +17,7 @@ const getLeaders = async (req, res) => {
             // Match the document with the specified chatId
             { $match: { chatId: chatId } }
           ])
-        console.log(curUserWithRank)
+        
         if (users) {
             const leaders = []
             for (let index = 0; index < users.length; index++) {
