@@ -7,6 +7,7 @@ import { Earnings } from "../models/earnings.js";
 // 3. If correct response, add score to earnings
 const updateResponse = async (req, res) => {
     const { questionId, userId, userName, selectedOption, isCorrect } = req.body;
+    console.log('selected option:', selectedOption)
     // check if user doesnot exist create user document in db
     try {
         const user = User.find({ chatId: userId })

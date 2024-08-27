@@ -1,7 +1,7 @@
 import { Trivia } from "../models/trivia.js"
 import { User } from "../models/user.js"
 const getQuestion = async (req, res) => {
-    const { date, chatId } = req.query
+    const { date, chatId, userName } = req.query
     try {
         const question = await Trivia.find({ date: date })
         // console.log(question)
@@ -11,12 +11,16 @@ const getQuestion = async (req, res) => {
         const userDetails = await User.find({ chatId: chatId })
         if(userDetails){
             // if exists fetch response status
-            responseStatus = await Trivia.find({date: date, "responses.userId": chatId }, { "responses.$": 1 })
+            responseStatus = await Trivia.find({date: date}, {responses: { $elemMatch: {userId: chatId }}})
         }
         else{
             // register userDetails in Db
             let user = new User({
-                chatId: msg.chat.id
+                chatId: msg.chat.id,
+                userName: userName,
+                active: true,
+                balance: 0,
+                referralCount: 0
             })
             await user.save()
         }
@@ -35,7 +39,7 @@ const getQuestion = async (req, res) => {
             score: question[0]? question[0].score : 0,
             correctAnswer: question[0]? question[0].correctAnswer : null,
             balance: balance,
-            responseStatus: responseStatus? responseStatus : null
+            responseStatus: responseStatus? responseStatus[0] : null
         })
     }catch(error) {
         res.status(400).json({
