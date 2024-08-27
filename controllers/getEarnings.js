@@ -4,13 +4,23 @@ const getEarnings = async (req, res) => {
     const { chatId } = req.query
     try {
         const response = await Earnings.find({ chatId: chatId })
-        console.log(response)
-        
-        res.status(200).json({
-            success: true,
-            earnings: response[0].earnings ? response[0].earnings : null
-        })
-    }catch(error) {
+        // sort by date and send last 50 earnings
+        if (response) {
+            const sortedByDate = response[0].earnings.reverse()
+            const slicedEarnings = sortedByDate.slice(0, 50)
+            res.status(200).json({
+                success: true,
+                earnings: slicedEarnings ? slicedEarnings : null
+            })
+        }
+        else {
+            res.status(200).json({
+                success: false,
+                earnings: null
+            })
+        }
+
+    } catch (error) {
         res.status(400).json({
             success: false,
             error: error
