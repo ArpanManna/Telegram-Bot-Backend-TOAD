@@ -44,7 +44,7 @@ bot.onText(/\/start/, async (msg, match) => {
         if (res.length) {
             const referral_url = `https://t.me/${config.botUserName}?start=${msg.chat.id}`
             bot.sendMessage(msg.chat.id,
-                `💰 Earnings: ${res[0].balance} $TOAD\n👬 Referral count : ${res[0].referralCount}\n\nRefer friends to receive additional $TOAD tokens!\n\nFor every seuucessful referral to the Toad Community chat, you will receive ${config.referralBonus} tokens, that will be applicable to any future $TOAD token distribution.\n\n👉 Share this referral link : ${referral_url} or click below ⬇️`,
+                `💰 Earnings: ${res[0].balance} $TOAD\n👬 Friends: ${res[0].referralCount}\n\nRefer friends to receive additional $TOAD tokens!\n\nFor every seuucessful referral to the Toad Community chat, you will receive ${config.referralBonus} tokens, that will be applicable to any future $TOAD token distribution.\n\n👉 Share this referral link : ${referral_url} or click below ⬇️`,
                 {
                     reply_markup: {
                         inline_keyboard: [

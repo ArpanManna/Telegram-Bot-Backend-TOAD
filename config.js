@@ -4,6 +4,6 @@ export const config = {
     "groupId": "@toad_test",
     "symbol": "TOAD",
     "telegramJoiningLink": "https://t.me/+qGL8DC4Iz3VkNGQ1",
-    "joiningBonus": 3000,
-    "referralBonus": 1000
+    "joiningBonus": 500,
+    "referralBonus": 250
 }
