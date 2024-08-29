@@ -12,6 +12,7 @@ const updateResponse = async (req, res) => {
     try {
         const user = User.find({ chatId: userId })
         if (!user.length) {
+            // create user document
             let newUser = new User({
                 chatId: userId,
                 userName: userName,
