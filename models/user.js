@@ -29,6 +29,10 @@ const userSchema = new mongoose.Schema({
     },
     earnings: {
         type: Array
+    },
+    member: {
+        type: Boolean,
+        default: false
     }
 })
 

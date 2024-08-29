@@ -5,6 +5,8 @@ import getQuestion from '../controllers/fetchQuestion.js';
 import addQuestion from '../controllers/addQuestion.js';
 import updateResponse from '../controllers/updateresponse.js';
 import getEarnings from '../controllers/getEarnings.js';
+import updateMembership from '../controllers/updateMembership.js';
+
 const router = express.Router();
 
 router.get("/friends", getFriends)
@@ -13,5 +15,6 @@ router.get('/questions/get', getQuestion)
 router.post('/question/set', addQuestion)
 router.post('/response', updateResponse)
 router.get('/earnings', getEarnings)
+router.post('/membership', updateMembership)
 
 export {router}

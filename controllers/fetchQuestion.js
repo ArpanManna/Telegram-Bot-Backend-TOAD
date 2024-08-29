@@ -39,7 +39,8 @@ const getQuestion = async (req, res) => {
             score: question[0]? question[0].score : 0,
             correctAnswer: question[0]? question[0].correctAnswer : null,
             balance: balance,
-            responseStatus: responseStatus? responseStatus[0] : null
+            responseStatus: responseStatus? responseStatus[0] : null,
+            member: userDetails[0].member
         })
     }catch(error) {
         res.status(400).json({
