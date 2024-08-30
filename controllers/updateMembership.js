@@ -47,15 +47,29 @@ const updateMembership = async (req, res) => {
             // update Earnings collection
             const userEarnings = await Earnings.find({ chatId: userId })
             const time = new Date().toDateString().split(' ').slice(0, 3)
-            await Earnings.updateOne({ _id: userEarnings[0]._id }, {
-                $push: {
+            if (!userEarnings) {
+                const userEarnings = new Earnings({
+                    chatId: userId,
                     earnings: {
                         type: 'Joining Bonus',
                         score: config.joiningBonus,
-                        time: time[2] + ' ' + time[1]
+                        time: time[2] + " " + time[1]
                     }
-                }
-            })
+                })
+                await userEarnings.save()
+            } else {
+                await Earnings.updateOne({ _id: userEarnings[0]._id }, {
+                    $push: {
+                        earnings: {
+                            type: 'Joining Bonus',
+                            score: config.joiningBonus,
+                            time: time[2] + ' ' + time[1]
+                        }
+                    }
+                })
+            }
+
+
         }
         res.status(200).json({
             success: true,
