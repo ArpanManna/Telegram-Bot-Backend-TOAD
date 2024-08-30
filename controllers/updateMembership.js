@@ -32,42 +32,45 @@ const updateMembership = async (req, res) => {
             await userEarnings.save()
         }
         else {
-            // set member status in user db
-            await User.updateOne({ chatId: userId }, {
-                $set: {
-                    member: true
-                }
-            })
-            // update user balance
-            await User.updateOne({ chatId: userId }, {
-                $inc: {
-                    balance: Number(config.joiningBonus)
-                }
-            })
-            // update Earnings collection
-            const userEarnings = await Earnings.find({ chatId: userId })
-            const time = new Date().toDateString().split(' ').slice(0, 3)
-            if (!userEarnings.length) {
-                const userEarnings = new Earnings({
-                    chatId: userId,
-                    earnings: {
-                        type: 'Joining Bonus',
-                        score: config.joiningBonus,
-                        time: time[2] + " " + time[1]
+            if (user[0].member == false) {
+                // set member status in user db
+                await User.updateOne({ chatId: userId }, {
+                    $set: {
+                        member: true
                     }
                 })
-                await userEarnings.save()
-            } else {
-                await Earnings.updateOne({ _id: userEarnings[0]._id }, {
-                    $push: {
+                // update user balance
+                await User.updateOne({ chatId: userId }, {
+                    $inc: {
+                        balance: Number(config.joiningBonus)
+                    }
+                })
+                // update Earnings collection
+                const userEarnings = await Earnings.find({ chatId: userId })
+                const time = new Date().toDateString().split(' ').slice(0, 3)
+                if (!userEarnings.length) {
+                    const userEarnings = new Earnings({
+                        chatId: userId,
                         earnings: {
                             type: 'Joining Bonus',
                             score: config.joiningBonus,
-                            time: time[2] + ' ' + time[1]
+                            time: time[2] + " " + time[1]
                         }
-                    }
-                })
+                    })
+                    await userEarnings.save()
+                } else {
+                    await Earnings.updateOne({ _id: userEarnings[0]._id }, {
+                        $push: {
+                            earnings: {
+                                type: 'Joining Bonus',
+                                score: config.joiningBonus,
+                                time: time[2] + ' ' + time[1]
+                            }
+                        }
+                    })
+                }
             }
+
 
 
         }
