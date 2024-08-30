@@ -10,7 +10,7 @@ const updateResponse = async (req, res) => {
     
     // check if user doesnot exist create user document in db
     try {
-        const user = User.find({ chatId: userId })
+        const user = await User.find({ chatId: userId })
         if (!user.length) {
             // create user document
             let newUser = new User({

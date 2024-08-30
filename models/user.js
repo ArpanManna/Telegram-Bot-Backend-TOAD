@@ -24,12 +24,6 @@ const userSchema = new mongoose.Schema({
     referredBy: {
         type: String
     },
-    referrals: {
-        type: Array
-    },
-    earnings: {
-        type: Array
-    },
     member: {
         type: Boolean,
         default: false
