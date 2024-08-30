@@ -30,7 +30,6 @@ const updateResponse = async (req, res) => {
     }
     try {
         const question = await Trivia.find({ _id: questionId })
-        console.log(question)
         if(!question){
             return res.status(400).json({
                 success: false,
