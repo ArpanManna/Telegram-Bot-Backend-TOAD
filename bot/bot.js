@@ -77,6 +77,7 @@ bot.onText(/\/start/, async (msg, match) => {
                 }
             })
             const referrarEarnings = await Earnings.find({ chatId: referredById })
+            const time = new Date().toDateString().split(' ').slice(0, 3)
             if (!referrarEarnings.length) {
                 let user = new Earnings({
                     chatId: referredById,
