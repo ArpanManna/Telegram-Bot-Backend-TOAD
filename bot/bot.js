@@ -76,17 +76,32 @@ bot.onText(/\/start/, async (msg, match) => {
                     balance: config.referralBonus
                 }
             })
-            // update earnings collection for referrer bonus
-            await Earnings.updateOne({ chatId: referredById }, {
-                $push: {
+            const referrarEarnings = await Earnings.find({ chatId: referredById })
+            if (!referrarEarnings.length) {
+                let user = new Earnings({
+                    chatId: referredById,
                     earnings: {
                         type: 'Referral',
                         score: config.referralBonus,
-                        time: time[2] + ' ' + time[1],
+                        time: time[2] + " " + time[1],
                         referred: msg.chat.username
                     }
-                }
-            })
+                })
+                await user.save()
+            } else {
+                // update earnings collection for referrer bonus
+                await Earnings.updateOne({ chatId: referredById }, {
+                    $push: {
+                        earnings: {
+                            type: 'Referral',
+                            score: config.referralBonus,
+                            time: time[2] + ' ' + time[1],
+                            referred: msg.chat.username
+                        }
+                    }
+                })
+            }
+
         }
 
     }
