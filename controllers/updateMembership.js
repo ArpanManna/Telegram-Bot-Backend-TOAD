@@ -47,7 +47,7 @@ const updateMembership = async (req, res) => {
             // update Earnings collection
             const userEarnings = await Earnings.find({ chatId: userId })
             const time = new Date().toDateString().split(' ').slice(0, 3)
-            if (!userEarnings) {
+            if (!userEarnings.length) {
                 const userEarnings = new Earnings({
                     chatId: userId,
                     earnings: {
