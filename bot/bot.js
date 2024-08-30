@@ -40,7 +40,6 @@ async () => {
 
 bot.onText(/\/start/, async (msg, match) => {
     if (match.input == "/start") {
-        console.log(msg)
         const res = await User.find({ chatId: msg.chat.id })
         if (!res.length) {
             let user = new User({
