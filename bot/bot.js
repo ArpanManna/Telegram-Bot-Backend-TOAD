@@ -44,7 +44,7 @@ bot.onText(/\/start/, async (msg, match) => {
         if (!res.length) {
             let user = new User({
                 chatId: msg.chat.id.toString(),
-                userName: msg.chat.username.toString(),
+                userName: msg.chat.username? msg.chat.username.toString(): msg.chat.username,
                 active: true,
                 balance: 0,
                 referralCount: 0
@@ -60,7 +60,7 @@ bot.onText(/\/start/, async (msg, match) => {
         if (!res.length) {
             let user = new User({
                 chatId: msg.chat.id.toString(),
-                userName: msg.chat.username.toString(),
+                userName: msg.chat.username? msg.chat.username.toString(): msg.chat.username,
                 active: true,
                 balance: 0,
                 referralCount: 0,
@@ -84,7 +84,7 @@ bot.onText(/\/start/, async (msg, match) => {
                         type: 'Referral',
                         score: config.referralBonus,
                         time: time[2] + " " + time[1],
-                        referred: msg.chat.username.toString()
+                        referred: msg.chat.username? msg.chat.username.toString(): msg.chat.username,
                     }
                 })
                 await user.save()
@@ -96,7 +96,7 @@ bot.onText(/\/start/, async (msg, match) => {
                             type: 'Referral',
                             score: config.referralBonus,
                             time: time[2] + ' ' + time[1],
-                            referred: msg.chat.username.toString()
+                            referred: msg.chat.username? msg.chat.username.toString(): msg.chat.username,
                         }
                     }
                 })
