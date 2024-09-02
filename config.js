@@ -5,5 +5,7 @@ export const config = {
     "symbol": "TOAD",
     "telegramJoiningLink": "https://t.me/+qGL8DC4Iz3VkNGQ1",
     "joiningBonus": 500,
-    "referralBonus": 250
+    "referralBonus": 250,
+    "initialUsersCount": 1000,
+    "initialUsersBonus": 10000
 }
