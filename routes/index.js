@@ -6,6 +6,10 @@ import addQuestion from '../controllers/addQuestion.js';
 import updateResponse from '../controllers/updateresponse.js';
 import getEarnings from '../controllers/getEarnings.js';
 import updateMembership from '../controllers/updateMembership.js';
+import addTask from '../controllers/addTask.js'
+import updateSocialResponse from '../controllers/updateSocialActivity.js';
+import getTasks from '../controllers/getTasks.js';
+import updateEarnings from '../controllers/updateEarnings.js';
 
 const router = express.Router();
 
@@ -15,6 +19,10 @@ router.get('/questions/get', getQuestion)
 router.post('/question/set', addQuestion)
 router.post('/response', updateResponse)
 router.get('/earnings', getEarnings)
+router.get('/earnings/update', updateEarnings)
 router.post('/membership', updateMembership)
+router.post('/tasks/set', addTask)
+router.post('/tasks/update', updateSocialResponse)
+router.get('/tasks/get', getTasks)
 
 export {router}
