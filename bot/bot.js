@@ -21,21 +21,21 @@ const bot = new TelegramBot(process.env.BOT_TOKEN, {
     polling: true
 })
 
-// update bot webhook events
-async () => {
-    await bot.setWebHook("", {
-        allowed_updates: JSON.stringify(
-            [
-                "message",
-                "edited_channel_post",
-                "callback_query",
-                "message_reaction",
-                "message_reaction_count",
-                "chat_memeber"
-            ]
-        )
-    })
-}
+// // update bot webhook events
+// async () => {
+//     await bot.setWebHook("", {
+//         allowed_updates: JSON.stringify(
+//             [
+//                 "message",
+//                 "edited_channel_post",
+//                 "callback_query",
+//                 "message_reaction",
+//                 "message_reaction_count",
+//                 "chat_memeber"
+//             ]
+//         )
+//     })
+// }
 
 
 bot.onText(/\/start/, async (msg, match) => {
@@ -189,3 +189,9 @@ bot.onText(/\/start/, async (msg, match) => {
         }
     }
 })
+
+bot.on('polling_error', async(msg) => {
+    console.log(msg)
+})
+
+console.log("Bot started successfully")
