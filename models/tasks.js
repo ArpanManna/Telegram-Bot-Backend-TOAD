@@ -6,7 +6,7 @@ const tasksSchema = new mongoose.Schema({
         required: true
     },
     meta: {
-        type: String,
+        type: Object,
     },
     score: {
         type: Number
