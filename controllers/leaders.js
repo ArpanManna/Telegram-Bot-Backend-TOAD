@@ -5,7 +5,7 @@ const getLeaders = async (req, res) => {
         const {chatId} = req.query
         const curUser = await User.findOne({chatId})
         const totalHolders = await User.countDocuments()
-        const users = await User.find().sort({ balance: -1 }).limit(20)
+        const users = await User.find().sort({ balance: -1 }).limit(50)
         const curUserWithRank = await User.aggregate([
             // Add a sequential index field
             { $setWindowFields: { 
