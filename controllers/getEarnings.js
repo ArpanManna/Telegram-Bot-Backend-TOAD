@@ -7,7 +7,7 @@ const getEarnings = async (req, res) => {
         // sort by date and send last 50 earnings
         if (response) {
             const sortedByDate = response[0].earnings.reverse()
-            const slicedEarnings = sortedByDate.slice(0, 50)
+            const slicedEarnings = sortedByDate.slice(0, 20)
             res.status(200).json({
                 success: true,
                 earnings: slicedEarnings ? slicedEarnings : null
