@@ -1,16 +1,18 @@
-import { Earnings } from "../models/earnings.js"
+import { SocialResponse } from "../models/socialResponse.js"
+import { Tasks } from "../models/tasks.js"
 
-const getEarnings = async (req, res) => {
-    const { chatId } = req.query
+
+const getTasks = async (req, res) => {
+    const { userId } = req.query
     try {
-        const response = await Earnings.find({ chatId: chatId })
+        const tasks = await Tasks.find({})
+        const response = await SocialResponse.find({userId: userId})
         // sort by date and send last 50 earnings
         if (response) {
-            const sortedByDate = response[0].earnings.reverse()
-            const slicedEarnings = sortedByDate.slice(0, 20)
             res.status(200).json({
                 success: true,
-                earnings: slicedEarnings ? slicedEarnings : null
+                tasks: tasks,
+                response: response
             })
         }
         else {
@@ -19,7 +21,6 @@ const getEarnings = async (req, res) => {
                 earnings: null
             })
         }
-
     } catch (error) {
         res.status(400).json({
             success: false,
@@ -29,4 +30,4 @@ const getEarnings = async (req, res) => {
 
 }
 
-export default getEarnings
+export default getTasks
