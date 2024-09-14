@@ -75,7 +75,7 @@ const updateSocialResponse = async (req, res) => {
             let user = new Earnings({
                 chatId: userId,
                 earnings: {
-                    type: task[0].meta? task[0].meta : 'TOAD Bounty',
+                    type: task[0].title? task[0].title : 'TOAD Bounty',
                     score: task[0].score,
                     time: time[2] + " " + time[1]
                 }
@@ -85,7 +85,7 @@ const updateSocialResponse = async (req, res) => {
             await Earnings.updateOne({ _id: userEarnings[0]._id }, {
                 $push: {
                     earnings: {
-                        type: task[0].meta? task[0].meta : 'TOAD Bounty',
+                        type: task[0].title? task[0].title : 'TOAD Bounty',
                         score: task[0].score,
                         time: time[2] + ' ' + time[1]
                     }
