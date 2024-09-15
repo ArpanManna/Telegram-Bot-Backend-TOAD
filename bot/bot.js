@@ -191,3 +191,9 @@ bot.onText(/\/start/, async (msg, match) => {
         }
     }
 })
+
+bot.on('polling_error', async(msg) => {
+    console.log(msg)
+})
+
+console.log("Bot started successfully")
