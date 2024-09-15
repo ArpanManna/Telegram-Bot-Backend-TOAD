@@ -44,6 +44,8 @@ bot.onText(/\/start/, async (msg, match) => {
     let specialJoiningBonus = 0
     if (initialUsersCount < config.initialUsersCount) {
         specialJoiningBonus = config.initialUsersBonus
+    }else{
+        specialJoiningBonus = config.joiningBonus
     }
     if (match.input == "/start") {
         const res = await User.find({ chatId: msg.chat.id })
@@ -169,7 +171,7 @@ bot.onText(/\/start/, async (msg, match) => {
             let user = new Earnings({
                 chatId: msg.chat.id,
                 earnings: {
-                    type: 'Toad Bounty',
+                    type: 'Joining Bonus',
                     score: config.initialUsersBonus,
                     time: time[2] + " " + time[1]
                 }
@@ -180,7 +182,7 @@ bot.onText(/\/start/, async (msg, match) => {
             await Earnings.updateOne({ chatId: msg.chat.id }, {
                 $push: {
                     earnings: {
-                        type: 'Toad Bounty',
+                        type: 'Joining Bonus',
                         score: config.initialUsersBonus,
                         time: time[2] + ' ' + time[1]
                     }
