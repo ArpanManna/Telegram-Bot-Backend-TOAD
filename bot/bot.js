@@ -91,7 +91,7 @@ bot.onText(/\/start/, async (msg, match) => {
         if (!res.length) {
             bot.sendPhoto(msg.chat.id,
                 'https://peach-careful-termite-578.mypinata.cloud/ipfs/QmVeRg56kDWSUGQepLmnvBxsidQ5XuDTHocjBJKefXmDuF', {
-                caption: `Hey ${msg.chat.first_name}, cool you joined TOAD\n\n💎 Farm $TOAD for 🆓\n💡 Secure your spot for airdrops & exclusive rewards 🔜`,
+                caption: `Hey ${msg.chat.first_name}, cool you joined TOAD\n\n💎 *Learn* crypto *Play* crypto *Earn* crypto $TOAD for\n💎 Farm $TOAD for 🆓\n💡 Secure your spot for airdrops & exclusive rewards 🔜`,
                 reply_markup: {
                     inline_keyboard: [
                         [
@@ -107,7 +107,8 @@ bot.onText(/\/start/, async (msg, match) => {
                             },
                         ],
                     ],
-                }
+                },
+                parse_mode: "Markdown"
             })
             let user = new User({
                 chatId: msg.chat.id.toString(),
