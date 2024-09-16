@@ -8,7 +8,6 @@ import { SocialResponse } from "../models/socialResponse.js";
 // 3. If correct response, add score to earnings
 const updateSocialResponse = async (req, res) => {
     const { socialTaskId, userId, userName } = req.body;
-    console.log(req.body)
     // check if user doesnot exist create user document in db
     try {
         const user = await User.find({ chatId: userId })
@@ -29,9 +28,10 @@ const updateSocialResponse = async (req, res) => {
             error: error
         })
     }
+
+    // update tasks response
     try {
         const task = await Tasks.find({ _id: socialTaskId })
-        console.log(task)
         if (!task) {
             return res.status(400).json({
                 success: false,
@@ -40,7 +40,6 @@ const updateSocialResponse = async (req, res) => {
         }
 
         const response = await SocialResponse.find({ userId: userId })
-        console.log("response:", response)
         if (!response.length) {
             let newResponse = new SocialResponse({
                 userId: userId,
@@ -51,6 +50,15 @@ const updateSocialResponse = async (req, res) => {
             })
             await newResponse.save()
         } else {
+            const prevResponse = response[0]?.responses.find((item) => 
+                item.taskId.toString() == socialTaskId
+            )
+            if(prevResponse){
+                return res.status(400).json({
+                    success: false,
+                    msg: "Already responded!"
+                })
+            }
             await SocialResponse.updateOne({ _id: response[0]._id }, {
                 $push: {
                     responses: {
