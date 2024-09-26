@@ -12,6 +12,8 @@ import getTasks from '../controllers/getTasks.js';
 import updateEarnings from '../controllers/updateEarnings.js';
 import getFriendsCount from '../controllers/getFriendsCount.js';
 import updateWallet from '../controllers/updateWalletAddress.js';
+import addPartnerTask from '../controllers/addPartnerTasks.js';
+import updateSocialResponsePartner from '../controllers/updateSocialActivityPartner.js';
 const router = express.Router();
 
 router.get("/friends", getFriends)
@@ -23,8 +25,11 @@ router.get('/earnings', getEarnings)
 router.post('/earnings/update', updateEarnings)
 router.post('/membership', updateMembership)
 router.post('/tasks/set', addTask)
+router.post('/tasks/partner/set', addPartnerTask)
 router.post('/tasks/update', updateSocialResponse)
+router.post('/tasks/update/partner', updateSocialResponsePartner)
 router.get('/tasks/get', getTasks)
 router.get('/friends/count', getFriendsCount)
 router.post('/wallet', updateWallet)
+
 export {router}

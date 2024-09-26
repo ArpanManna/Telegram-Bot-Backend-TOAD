@@ -1,3 +1,5 @@
+import { PartnerTasks } from "../models/partnerTasks.js"
+import { PartnerTasksResponse } from "../models/partnerTasksResponse.js"
 import { SocialResponse } from "../models/socialResponse.js"
 import { Tasks } from "../models/tasks.js"
 
@@ -6,13 +8,17 @@ const getTasks = async (req, res) => {
     const { userId } = req.query
     try {
         const tasks = await Tasks.find({})
+        const partnertasks = await PartnerTasks.find({})
         const response = await SocialResponse.find({userId: userId})
+        const responsePartnerTasks = await PartnerTasksResponse.find({userId: userId})
         // sort by date and send last 50 earnings
         if (response) {
             res.status(200).json({
                 success: true,
                 tasks: tasks,
-                response: response
+                response: response,
+                partnertasks: partnertasks,
+                partnerTasksResponse: responsePartnerTasks
             })
         }
         else {
