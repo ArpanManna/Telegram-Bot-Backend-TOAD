@@ -1,4 +1,4 @@
-import { PartnerTasks } from "../models/partnerTasks";
+import { PartnerTasks } from "../models/partnerTasks.js";
 
 const addPartnerTask = async (req, res) => {
     const { title, meta, score } = req.body;

@@ -5,7 +5,7 @@ import { PartnerTasksResponse } from "../models/partnerTasksResponse.js";
 // 1. update Task response
 // 2. If correct response, add score to user balance 
 // 3. If correct response, add score to earnings
-const updateSocialResponse = async (req, res) => {
+const updateSocialResponsePartner = async (req, res) => {
     const { socialTaskId, userId, userName } = req.body;
     // check if user doesnot exist create user document in db
     try {
@@ -113,4 +113,4 @@ const updateSocialResponse = async (req, res) => {
 
 }
 
-export default updateSocialResponse
+export default updateSocialResponsePartner
