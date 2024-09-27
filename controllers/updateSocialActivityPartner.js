@@ -40,7 +40,7 @@ const updateSocialResponsePartner = async (req, res) => {
 
         const response = await PartnerTasksResponse.find({ userId: userId })
         if (!response.length) {
-            let newResponse = new SocialResponse({
+            let newResponse = new PartnerTasksResponse({
                 userId: userId,
                 responses: {
                     taskId: task[0]._id,
