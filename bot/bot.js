@@ -196,9 +196,9 @@ bot.onText(/\/start/, async (msg, match) => {
 
 bot.on('polling_error', async (error) => {
     console.log('Polling error. Retrying...');
-    setTimeout(() => {
-      bot.startPolling(); // Restart polling after an error
-    }, 5000); // Wait 10 seconds before retrying
+    // setTimeout(() => {
+    //   bot.startPolling(); // Restart polling after an error
+    // }, 5000); // Wait 10 seconds before retrying
 })
 
 console.log("Bot started successfully")
