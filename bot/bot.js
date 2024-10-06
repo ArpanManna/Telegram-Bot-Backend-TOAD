@@ -18,13 +18,13 @@ mongoose.connect(process.env.DB_CONNECTION_URL)
 
 // start Telegram bot instance
 const bot = new TelegramBot(process.env.BOT_TOKEN, {
-    // polling: true,
-    polling: {
-        interval: 1000,
-        params: {
-            timeout: 10
-        }
-    }
+    polling: true,
+    // polling: {
+    //     interval: 1000,
+    //     params: {
+    //         timeout: 10
+    //     }
+    // }
 })
 
 // // update bot webhook events
