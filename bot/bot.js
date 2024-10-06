@@ -18,7 +18,13 @@ mongoose.connect(process.env.DB_CONNECTION_URL)
 
 // start Telegram bot instance
 const bot = new TelegramBot(process.env.BOT_TOKEN, {
-    polling: true
+    // polling: true,
+    polling: {
+        interval: 1000,
+        params: {
+            timeout: 10
+        }
+    }
 })
 
 // // update bot webhook events
@@ -195,7 +201,7 @@ bot.onText(/\/start/, async (msg, match) => {
 })
 
 bot.on('polling_error', async (error) => {
-    console.log('Polling error. Retrying...');
+    console.log(`Polling error. Retrying...${error}`);
     // setTimeout(() => {
     //   bot.startPolling(); // Restart polling after an error
     // }, 5000); // Wait 10 seconds before retrying
@@ -204,3 +210,4 @@ bot.on('polling_error', async (error) => {
 console.log("Bot started successfully")
 
 
+// bot.startPolling()
