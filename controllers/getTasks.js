@@ -17,7 +17,7 @@ const getTasks = async (req, res) => {
                 success: true,
                 tasks: tasks,
                 response: response,
-                partnertasks: partnertasks,
+                partnertasks: partnertasks? partnertasks.reverse(): partnertasks,
                 partnerTasksResponse: responsePartnerTasks
             })
         }

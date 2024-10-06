@@ -76,7 +76,7 @@ const updateSocialResponsePartner = async (req, res) => {
         })
         // update Earnings collection
         const userEarnings = await Earnings.find({ chatId: userId })
-        console.log('userEarnings', userEarnings)
+        // console.log('userEarnings', userEarnings)
         const time = new Date().toDateString().split(' ').slice(0, 3)
         if (!userEarnings.length) {
             let user = new Earnings({
